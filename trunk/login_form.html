@@ -1,0 +1,14 @@
+<form action="login.php" method="post">
+  <table >
+	<tr>
+	  <td><input name="email" type="text" value="Email" onfocus="if(this.value=='Email') this.value='';" onblur="if(this.value=='') this.value='Email';"/></td>
+	</tr>
+	<tr>
+	  <td><input name="password" type="text" autocomplete="off" value="Password" onfocus="if(this.value=='Password'){ this.value='';this.type='password'}" onblur="if(this.value=='') this.value='Password';"/></td>
+	</tr>
+	<tr>
+	  <td><input type="submit" name="submit" class="button" value="Log in" />
+	  <input type="button" class="button" value="Register" ONCLICK="window.location.href='register.php'"> </td>
+	</tr>
+  </table>
+</form>
