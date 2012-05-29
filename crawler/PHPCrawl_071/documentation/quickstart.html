@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+ <title>PHPCrawl - Webcrawler Class</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+
+  <div id="header">
+    <h1>PHPCrawl Documentation</h1>
+    For PHPCrawl Version 0.71
+  </div>
+
+  <div id="menu_container">
+    <div id="menu">
+      <ul id="menu">
+      <li><a href="index.html">Introduction & Requirements</a></li>
+      <li><a href="quickstart.html">Quickstart</a></li>
+      <li><a href="example.html">Example-Script</a></li>
+      <li><a href="version_info.html">Version-History</a></li>
+      <li><a href="testinterface.html">The Testinterface</a></li>
+      <li><a href="classreference.html">Classreference</a></li>
+      </ul>
+    </div>
+    
+   <div id="download">
+      <ul id="menu">
+      <li><a href="download.html">Download PHPCrawl<br></a></li>
+      <li><a href="http://sourceforge.net/projects/phpcrawl/forums">Forums<br></a></li>
+      <li><a href="http://sourceforge.net/tracker/?group_id=89439&atid=590146">Report a bug<br></a></li>
+      <li><a href="http://sourceforge.net/projects/phpcrawl">Sourceforge Projectpage<br></a></li>
+      </ul>
+    </div>
+    
+    <div id="sflogo">
+      <a href="http://sourceforge.net/projects/phpcrawl">
+        <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=89439&amp;type=14" border="0" width="150" height="40" alt="Get PHPCrawl at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+      </a>
+    </div>
+       
+  </div>
+
+  <div id="main">
+    <h2>Quickstart & Example</h2>
+    
+    <p>
+      The following steps show the usage of phpcrawl.<br>
+      This is what you have to do to start a crawling-process:<br><br>
+
+
+      1. Include the phpcrawl-mainclass to your script or project. Its located in the "classes"-path of the package.<br>
+    </p>
+    
+    <p id="code">
+      <span style="color: #000000">
+      <span style="color: #0000BB"></span>
+      <span style="color: #007700">include(</span><span style="color: #DD0000">"classes/phpcrawler.class.php"</span><span style="color: #007700">);
+      </span>
+    </p>
+      
+    <p>
+      2. Extend the phpcrawler-class and override the handlePageData-Method with your own code to handle
+      the information of every page or file the crawler will find.<br>
+    </p>
+    
+    <p id="code">
+     <span style="color: #007700">class&nbsp;</span><span style="color: #0000BB">MyCrawler&nbsp;</span><span style="color: #007700">extends&nbsp;</span><span style="color: #0000BB">PHPCrawler
+     <br /></span><span style="color: #007700">{
+     <br />&nbsp;&nbsp;function&nbsp;</span><span style="color: #0000BB">handlePageData</span><span style="color: #007700">(&amp;</span><span style="color: #0000BB">$page_data</span><span style="color: #007700">)
+     <br />&nbsp;&nbsp;{
+     <br />&nbsp;&nbsp;&nbsp;&nbsp;</span><span style="color: #FF8000">//&nbsp;your&nbsp;code,&nbsp;do&nbsp;something&nbsp;with&nbsp;the&nbsp;array&nbsp;$page_data
+
+     <br />&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;that&nbsp;contains&nbsp;the&nbsp;page/file-information
+     <br />&nbsp;&nbsp;</span><span style="color: #007700">}
+     <br />}
+     <br /></span>
+    </p>
+      
+    <p>
+      3. Create an instance of that class, define the behaviour of the crawler with the
+      given methods and start crawling.<br>
+    </p>
+    
+    <p id="code">
+     <span style="color: #0000BB">$crawler&nbsp;</span><span style="color: #007700">=&nbsp;&amp;new&nbsp;</span><span style="color: #0000BB">MyCrawler</span><span style="color: #007700">();
+     <br /></span><span style="color: #0000BB">$crawler</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">setURL</span><span style="color: #007700">(</span><span style="color: #DD0000">"www.foo.com"</span><span style="color: #007700">);
+     <br /></span><span style="color: #0000BB">$crawler</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">addReceiveContentType</span><span style="color: #007700">(</span><span style="color: #DD0000">"/text\/html/"</span><span style="color: #007700">);
+
+     <br /></span><span style="color: #FF8000">//&nbsp;...
+     <br />
+     <br /></span><span style="color: #0000BB">$crawler</span><span style="color: #007700">-&gt;</span><span style="color: #0000BB">go</span><span style="color: #007700">();&nbsp;
+     <br /></span>
+     </span>
+
+    </p>
+  
+  </div>
+  
+</body>
+</html>

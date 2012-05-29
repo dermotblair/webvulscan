@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+ <title>PHPCrawl - Webcrawler Class</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+
+  <div id="header">
+    <h1>PHPCrawl Documentation</h1>
+    For PHPCrawl Version 0.71
+  </div>
+
+  <div id="menu_container">
+    <div id="menu">
+      <ul id="menu">
+      <li><a href="index.html">Introduction & Requirements</a></li>
+      <li><a href="quickstart.html">Quickstart</a></li>
+      <li><a href="example.html">Example-Script</a></li>
+      <li><a href="version_info.html">Version-History</a></li>
+      <li><a href="testinterface.html">The Testinterface</a></li>
+      <li><a href="classreference.html">Classreference</a></li>
+      </ul>
+    </div>
+    
+    <div id="download">
+      <ul id="menu">
+      <li><a href="download.html">Download PHPCrawl<br></a></li>
+      <li><a href="http://sourceforge.net/projects/phpcrawl/forums">Forums<br></a></li>
+      <li><a href="http://sourceforge.net/tracker/?group_id=89439&atid=590146">Report a bug<br></a></li>
+      <li><a href="http://sourceforge.net/projects/phpcrawl">Sourceforge Projectpage<br></a></li>
+      </ul>
+    </div>
+    
+   <div id="sflogo">
+      <a href="http://sourceforge.net/projects/phpcrawl">
+        <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=89439&amp;type=14" border="0" width="150" height="40" alt="Get PHPCrawl at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+      </a>
+    </div>
+       
+  </div>
+
+  <div id="main">
+  <h2>The Testinterface</h2>
+  
+  <p align="justify">
+    <img src="img/testinterface.jpg" style="float: right; margin-left: 15px;">
+    Since PHPCrawl version 0.7, a visual HTML-testinterface comes along
+    with the package.
+    It was build to test the crawler, but since the number of settings and methods is growing,
+    the inteface also may be useful to find the right class-setup for your needs
+    or just to play around with the different settings.
+    <br><br>
+    You'll find the test-interface in the directory "test_interface" of the package (file "index.php").<br>
+    In there you also find a tiny configuration-file called "phpcrawl_testinterface.conf.php".<br>
+    <br>
+    <b>
+    Before using the test-inerface the first time, you have to choose a username and password for the login
+    (http-auth) and put it into the mentioned configuration-file (variables $cfg_authUsername and $cfg_authPassword).
+    </b>
+    <br>
+    <br>
+    The interface allows you to quickly setup the crawler-class, choose the output and start the
+    crawling-process with these settings.<br>
+    By clicking the littel info-icons beside
+    the options you get directly to the explanations of the corresponding class-methods
+    in the classreference.<br>
+    Its also possible to save and load different setups.
+    <br>
+    <br>
+    Please note that the output will be done in a browser-window, so your browser may get problems
+    if you let the crawler return information about thousands of found pages and files.
+  </p>
+  
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,21 @@
+<form action="register.php" method="post">
+  <table >
+	<tr>
+	  <td><input name="regusername" type="text" value="Username" onfocus="if(this.value=='Username') this.value='';" onblur="if(this.value=='') this.value='Username';"/></td>
+	</tr>
+	<tr>
+	  <td><input name="regpassword" type="text" autocomplete="off" value="Password" onfocus="if(this.value=='Password'){ this.value='';this.type='password';}" onblur="if(this.value=='') this.value='Password';"/></td>
+	</tr>
+	<tr>
+	  <td><input name="regpassword2" type="text" autocomplete="off" value="Confirm Password" onfocus="if(this.value=='Confirm Password'){ this.value=''; this.type='password';}" onblur="if(this.value=='') this.value='Confirm Password';"/></td>
+	</tr>
+	<tr>
+	  <td><input name="email" type="text" value="Email" onfocus="if(this.value=='Email') this.value='';" onblur="if(this.value=='') this.value='Email';"/></td>
+	</tr>
+	<tr>
+	  <td><input type="submit" name="submit" class="button" value="Register" />
+	  <input type="reset" name="reset" class="button" value="Reset" /> </td>
+	</tr>
+  </table>
+</form>
+Note: Username and Password must be alphanumeric

@@ -1,0 +1,1044 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+ <title>PHPCrawl - Webcrawler Class</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body>
+
+
+  <div id="header">
+    <h1>PHPCrawl Documentation</h1>
+    For PHPCrawl Version 0.71
+  </div>
+
+  <div id="menu_container">
+    <div id="menu">
+      <ul id="menu">
+      <li><a href="index.html">Introduction & Requirements</a></li>
+      <li><a href="quickstart.html">Quickstart</a></li>
+      <li><a href="example.html">Example-Script</a></li>
+      <li><a href="version_info.html">Version-History</a></li>
+      <li><a href="testinterface.html">The Testinterface</a></li>
+      <li><a href="classreference.html">Classreference</a></li>
+      </ul>
+    </div>
+    
+    <div id="download">
+      <ul id="menu">
+      <li><a href="download.html">Download PHPCrawl<br></a></li>
+      <li><a href="http://sourceforge.net/projects/phpcrawl/forums">Forums<br></a></li>
+      <li><a href="http://sourceforge.net/tracker/?group_id=89439&atid=590146">Report a bug<br></a></li>
+      <li><a href="http://sourceforge.net/projects/phpcrawl">Sourceforge Projectpage<br></a></li>
+      </ul>
+    </div>
+    
+    <div id="sflogo">
+      <a href="http://sourceforge.net/projects/phpcrawl">
+        <img src="http://sflogo.sourceforge.net/sflogo.php?group_id=89439&amp;type=14" border="0" width="150" height="40" alt="Get PHPCrawl at SourceForge.net. Fast, secure and Free Open Source software downloads" />
+      </a>
+    </div>
+    
+  </div>
+
+  <div id="main">
+    <h2>Classreference: Class PHPCrawler</h2>
+    
+    <table id="reference_overview" align="center">
+      <tr>
+        <td clospan="2" class="head">Constructor</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#phpcrawler">PHPCrawler()</a></td>
+        <td class="description">Initializes a new crawler.</td>
+      </tr>
+    </table>
+    
+    <table id="reference_overview" align="center">
+      <tr>
+        <td clospan="2" class="head">Basic methods</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#seturl">setURL()</a></td>
+        <td class="description">Sets the root-page to crawl</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setport">setPort()</a></td>
+        <td class="description">Sets the port to connect to</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#go">go()</a></td>
+        <td class="description">Starts the crawling-process</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#getreport">getReport()</a></td>
+        <td class="description">Retruns an array with report-information after the crawling-process has finished</td>
+      </tr>
+    </table>
+      
+    <table id="reference_overview" align="center">
+      <tr>
+        <td clospan="2" class="head">Overrideable methods</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#handlepagedata">handlePageData())</a></td>
+        <td class="description">Overridable method to access and handle the information and content of found pages and files</td>
+      </tr>
+    </table>
+    
+    <table id="reference_overview" align="center">
+      <tr>
+        <td clospan="2" class="head">Follow-options</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setfollowmode">setFollowMode()</a></td>
+        <td class="description">Sets the general follow mode (which links to follow)</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#addfollowmatch">addFollowMatch()</a></td>
+        <td class="description">Adds an regular expression (PCRE) to the list of rules that decide which links should be followed explicitly.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#addnonfollowmatch">addNonFollowMatch()</a></td>
+        <td class="description">Adds an regular expression (PCRE) to the list of rules that decide which links should be ignored.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setfollowredirects">setFollowRedirects()</a></td>
+        <td class="description">Decides if the crawler should follow redirects sent in headers.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setfollowredirectstillcontent">setFollowRedirectsTillContent()</a></td>
+        <td class="description">Decides if the crawler should follow redirects until first content was found, regardless of the follow-mode.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#addlinkpriority">addLinkPriority()</a></td>
+        <td class="description">Adds a regular expression togehter with a priority-level to the list of rules that decide which of the found links should be prefered.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#obeyrobotstxt">obeyRobotsTxt()</a></td>
+        <td class="description">Decides if the crawler should obey robots.txt-files.</td>
+      </tr>
+    </table>
+    
+    <table id="reference_overview" align="center">
+      <tr>
+        <td clospan="2" class="head">Receive-options</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#addreceivecontenttype">addReceiveContentType()</a></td>
+        <td class="description">Adds a regular expression (PCRE) to the list of rules that decide which pages or files should be received.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#settmpfile">setTmpFile()</a></td>
+        <td class="description">Sets the temporary file to use for receiving data.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#addreceivetomemorymatch">addReceiveToMemoryMatch()</a></td>
+        <td class="description">Adds a expression to the list of rules that decide which kind of content should be received directly to local memory.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#addreceivetotmpfilematch">addReceiveToTmpFileMatch()</a></td>
+        <td class="description">Adds a expression to the list of rules that decide which kind of content should be received to a temporary file.</td>
+      </tr>
+    </table>
+    
+    <table id="reference_overview" align="center">
+      <tr>
+        <td clospan="2" class="head">Limiter-options</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setpagelimit">setPageLimit()</a></td>
+        <td class="description">Sets the limit of pages/files the crawler should crawl alltogether.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#settrafficlimit">setTrafficLimit()</a></td>
+        <td class="description">Sets the limit of bytes the crawler should receive alltogether.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setcontentsizelimit">setContentSizeLimit()</a></td>
+        <td class="description">Sets the content-size-limit for content the crawler should receive.</td>
+      </tr>
+    </table>
+    
+    <table id="reference_overview" align="center">
+      <tr>
+        <td clospan="2" class="head">Linkextraction-options</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setaggressivelinkextraction">setAggressiveLinkExtraction()</a></td>
+        <td class="description">Enables or disables agressive link-extraction.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setlinkextractiontags">setLinkExtractionTags()</a></td>
+        <td class="description">Sets the list of tags from which links should be extracted.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#addlinkextractiontags">addLinkExtractionTags()</a></td>
+        <td class="description">DEPRECATED! Sets the list of tags from which links should be extracted.</td>
+      </tr>
+    </table>
+    
+    <table id="reference_overview" align="center">
+      <tr>
+        <td clospan="2" class="head">Timeout-options</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setconnectiontimeout">setConnectionTimeout()</a></td>
+        <td class="description">Sets the timeout for the connection (request) to the server(s).</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setstreamtimeout">setStreamTimeout()</a></td>
+        <td class="description">Sets the timeout for streams when the crawler is receiving content.</td>
+      </tr>
+    </table>
+    
+    <table id="reference_overview" align="center">
+      <tr>
+        <td clospan="2" class="head">Miscellaneous options</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setcookiehandling">setCookieHandling()</a></td>
+        <td class="description">Turns on/off the cookie-handling of the crawler.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#addbasicauthentication">addBasicAuthentication()</a></td>
+        <td class="description">Adds an URL-filterexpression together with an authentication (username/passwd) to the list of authentications to send.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#disableextendedlinkinfo">disableExtendedLinkInfo()</a></td>
+        <td class="description">Disables the storage of extended link-information of found links.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#setuseragentstring">setUserAgentString()</a></td>
+        <td class="description">Sets the "User-Agent"-string that will be send with request headers.</td>
+      </tr>
+      <tr>
+        <td class="method"><a href="#addlinksearchcontenttype">addLinkSearchContentType()</a></td>
+        <td class="description">Adds a rule to the list of rules that decide in what type of documents the crawler should search for links in</td>
+      </tr>
+    </table>
+    
+    <br>
+    
+    <h2>Details</h2>
+
+    <a name="phpcrawler"></a>
+    <p id="methoddetail">new PHPCrawler()</p>
+    <p>
+      Initializes a new instance of the crawler.
+      <br>
+      <br>
+      Important: You shouldn't create an instance of the class diretly!
+      Instead extend the class and override the handlePageData()-method.
+    </p>
+    
+    <a name="seturl"></a>
+    <p id="methoddetail">bool setURL (string url)</p>
+    <p>
+      Sets the URL of the first page the crawler should crawl (root-page).<br>
+      It can be the root of a domain (f.e. www.foo.com) or a path to a special site or folder (f.e. www.foo.com/bar/something.html).<br><br>
+      Note: This url has to be set before calling the go()-method (of course) ! If this root-page doesn't contain any further links, the crawling-process will stop.
+    </p>
+
+    <a name="setport"></a>
+    <p id="methoddetail">bool setPort (int port)</p>
+    <p>
+      <i>(since version 0.7)</i>
+      <br><br>
+      Sets the port of the hosting server to connect to for receiving the page/file given in setURL().<br>
+      The default port is 80.<br>
+      <br>
+      Note:<br>
+      $cralwer->setURL("http://www.foo.com");<br>
+      $crawler->setPort(443);<br>
+      <br>
+      ..effects the same as<br>
+      <br>
+      $cralwer->setURL("http://www.foo.com:443");
+    </p>
+
+    <a name="go"></a>
+    <p id="methoddetail">void go ()</p>
+    <p>
+      Starts the crawling process.<br>
+      <br>
+      Note: At least you should use the method addReceiveContentType() to let the crawler receive "text/html"-pages before calling the go-method, otherwise the crawler can't find any links.
+      Also be sure that you did override the handlePageDate()-method before calling the go()-method. Otherwise the crawler will start the process but nothing will happen to the data the crawler finds!
+    </p>
+
+    <a name="getreport"></a>
+    <p id="methoddetail">array getReport ()</p>
+    <p>
+      After the crawling-process has finished, this method returns an array with information
+      about the process. The following table lists the elements the array will contain.
+      
+      <br><br>
+      
+      <table id="param_table" align="center" border="1">
+      <tr class="head">
+      <td>Key</td>
+      <td>Type</td>
+      <td>Value</td>
+      </tr>
+
+      <tr>
+      <td>links_followed</td>
+      <td>int</td>
+      <td>The number of links/URLs the crawler found and followed.</td>
+      </tr>
+
+      <tr>
+      <td>files_received</td>
+      <td>int</td>
+      <td>The number of pages/files the crawler received.</td>
+      </tr>
+
+      <tr>
+      <td>bytes_received</td>
+      <td>int</td>
+      <td>The number of bytes the crawler received alltogether.</td>
+      </tr>
+      
+      <tr>
+      <td>process_runtime</td>
+      <td>float</td>
+      <td>The time the crawling-process was running in seconds.<br>
+      <i>(since veriosn 0.7)</i>
+      </td>
+      </tr>
+      
+      <tr>
+      <td>data_throughput</td>
+      <td>int</td>
+      <td>The average data-throughput in bytes per second.<br>
+      <i>(since veriosn 0.7)</i>
+      </td>
+      </tr>
+      
+      <tr>
+      <td>traffic_limit_reached</td>
+      <td>bool</td>
+      <td>Will be TRUE if the crawling-process stopped becaus the traffic-limit was reached.<br>
+      (See method setTrafficLimit())</td>
+      </tr>
+
+      <tr>
+      <td>file_limit_reached</td>
+      <td>bool</td>
+      <td>Will be TRUE if the page/file-limit was reached.<br>
+      (See method setPageLimit())</td>
+      </tr>
+
+      <tr>
+      <td>user_abort</td>
+      <td>bool</td>
+      <td>Will be TRUE if the crawling-process stopped because the overridable function handlePageData()
+      returned a negative value.<br>
+      <i>(since veriosn 0.7)</i>
+      </td>
+      </tr>
+    </table>
+    </p>
+    
+    <a name="setfollowmode"></a>
+    <p id="methoddetail">bool setFollowMode (int mode)</p>
+    <p>
+      This method sets the general follow-mode of the crawler.<br>
+      The following table lists and explains the supported follow-modes.
+      
+      <br><br>
+      
+      <table id="param_table" align="center" border="1">
+      <tr class="head">
+      <td>mode</td>
+      <td>explanation</td>
+      </tr>
+
+      <tr>
+      <td valign="top">0</td>
+      <td>The crawler will follow EVERY link, even if the link leads to a different host or domain.
+      If you choose this mode, you really should set a limit to the crawling-process (see limit-options), otherwise the crawler maybe will crawl the whole WWW !</td>
+      </tr>
+
+      <tr>
+      <td valign="top">1</td>
+      <td>The crawler will follow links that lead to the same host AND to hosts with the same domain like the one
+      in the root-url.<br>
+      F.e. if the root-url (setURL()) is "http://www.foo.com", the crawler will follow links to "http://www.foo.com/..."
+      and "http://bar.foo.com/...", but not to "http://www.another-domain.com/...".
+      </td>
+      </tr>
+
+      <tr>
+      <td valign="top">2</td>
+      <td>The crawler will only follow links that lead to the same host like the one in the root-url.<br>
+      F.e. if the root-url (setURL()) is "http://www.foo.com", the crawler will ONLY follow links to "http://www.foo.com/...",
+      but not to "http://bar.foo.com/..." and "http://www.another-domain.com/...".<br>
+      This is the default mode.</td>
+      </tr>
+
+      <tr>
+      <td valign="top">3</td>
+      <td>The crawler only follows links to pages or files that are in or under the same path like the one of the root-url.<br>
+      F.e. if the root-url is "http://www.foo.com/bar/index.html", the crawler will follow links to "http://www.foo.com/bar/page.html"
+      and "http://www.foo.com/bar/path/index.html", but not links to "http://www.foo.com/page.html".</td>
+      </tr>
+
+      </table>
+    </p>
+    
+    <a name="handlepagedata"></a>
+    <p id="methoddetail">int handlePageData (Array page_data)</p>
+    <p>
+      By overriding this method you get access to all information about the pages and files
+      the crawler found and followed. This method receives the information about the 
+      actual requested page/file through the array $page_data.
+      The tables below list the elements the array will contain.<br><br>
+      Since verion 0.7 the whole crawling-process will stop immedeatly if
+      this function returns a negative value (f.e. -1).
+
+      <br><br>
+      
+      <b>Information about the current URL</b>
+      <table id="param_table" align="center" border="1">
+      <tr>
+      <td width="130"><b>Key</b></td>
+      <td width="60"><b>Type</b></td>
+      <td width="410"><b>Value</b></td>
+      </tr>
+
+      <tr>
+      <td valign="top">url</td>
+      <td valign="top">string</td>
+      <td>The complete URL of the actual requested page or file, f.e. "http://www.foo.com/bar/page.html?x=y".</td>
+      </tr>
+
+      <tr>
+      <td valign="top">protocol</td>
+      <td valign="top">string</td>
+      <td>The protocol-part of the URL of the requested page or file, currently it will always be "http://".</td>
+      </tr>
+
+      <tr>
+      <td valign="top">host</td>
+      <td valign="top">string</td>
+      <td>The host-part of the URL of the requested page or file, f.e. "www.foo.com".</td>
+      </tr>
+
+      <tr>
+      <td valign="top">path</td>
+      <td valign="top">string</td>
+      <td>The path in the URL of the requested page or file, f.e. "/page/".</td>
+      </tr>
+
+      <tr>
+      <td valign="top">file</td>
+      <td valign="top">string</td>
+      <td>The name of the requested page or file, f.e. "page.html".</td>
+      </tr>
+
+      <tr>
+      <td valign="top">query</td>
+      <td valign="top">string</td>
+      <td>The query-part of the URL of the requested page or file, f.e. "?x=y".</td>
+      </tr>
+
+      <tr>
+      <td valign="top">port</td>
+      <td valign="top">int</td>
+      <td>The port of the URL the request was send to, f.e. 80</td>
+      </tr>
+      </table>
+
+      <br><br>
+
+      <b>Information about the header and the content of the current URL</b>
+      <table id="param_table" align="center" border="1">
+      <tr>
+      <td valign="top" width="130">received</td>
+      <td valign="top" width="60">boolean</td>
+      <td width="410">TRUE if the crawler received at least some source/content of this page or file and will follow the links it found in the source.
+      <br>See also addReceiveContentType() and setContentSizeLimit().</td>
+      </tr>
+
+      <tr>
+      <td valign="top">received_completely<br>received_completly</td>
+      <td valign="top">boolean</td>
+      <td>TRUE if the crawler received the COMPLETE source/content of this page or file.
+      <br>See also setContentSizeLimit().</td>
+      </tr>
+
+      <tr>
+      <td valign="top">bytes_received</td>
+      <td valign="top">int</td>
+      <td>The number of bytes the crawler received of the content of this page or file.</td>
+      </tr>
+
+      <tr>
+      <td valign="top">header</td>
+      <td valign="top">string</td>
+      <td>The complete header the webserver sent with this page or file.</td>
+      </tr>
+
+      <tr>
+      <td valign="top">header_send</td>
+      <td valign="top">string</td>
+      <td>The complete header the crawler sent to the server (debugging).<br>
+      <i>(since version 0.7)</i></td>
+      </tr>
+
+      <tr>
+      <td valign="top">http_status_code</td>
+      <td valign="top">int</td>
+      <td>The HTTP-statuscode the webserver send for the request, f.e. 200 (OK) or 404 (file not found).</td>
+      </tr>
+
+      <tr>
+      <td valign="top">content_type</td>
+      <td valign="top">string</td>
+      <td>The content-type of the page or file, f.e. "text/htrml" or "image/gif".<br>
+      <i>(since version 0.7)</i></td>
+      </tr>
+
+      <tr>
+      <td valign="top">received_to_memory</td>
+      <td valign="top">boolean</td>
+      <td>Will be true if the content was received into local memory.<br>
+      You will have access to the content of the current page or file through $page_data[source].
+      <i>(since version 0.7)</i></td>
+      </tr>
+
+      <tr>
+      <td valign="top">received_to_file</td>
+      <td valign="top">boolean</td>
+      <td>Will be true if the content was received into a temporary file.<br>
+      The content is stored in the temporary file $page_data[content_tmp_file] in this case.
+      <i>(since version 0.7)</i></td>
+      </tr>
+
+      <tr>
+      <td valign="top">source</td>
+      <td valign="top">string</td>
+      <td>The html-sourcecode of the page or the content of the file actually requested and received.<br>
+      It will be empty if "received" is FALSE and the source wont be complete if "received_completly" is FALSE !<br>
+      It also will be empty if the content wasn't received into memory.</td>
+      </tr>
+
+      <tr>
+      <td valign="top">content</td>
+      <td valign="top">string</td>
+      <td>A reference to the element "source" (see above).<br><i>(since version 0.7)</i></td>
+      </tr>
+
+      <tr>
+      <td valign="top">content_tmp_file</td>
+      <td valign="top">string</td>
+      <td>The temporary file to which the content was received.<br>
+      Will be empty if the content wasn't received to the temporary file.
+      <br><i>(since version 0.7)</i></td>
+      </tr>
+      </table>
+
+      <br><br>
+
+      <b>Referer information</b>
+      <table id="param_table" align="center" border="1">
+      <tr>
+      <td valign="top" width="130">referer_url</td>
+      <td valign="top" width="60">string</td>
+      <td width="410">The complete URL of the page that contained the link to the actual requested page or file.<br>
+      </td>
+      </tr>
+
+      <tr>
+      <td valign="top">refering_linkcode</td>
+      <td valign="top">string</td>
+      <td>The html-sourcecode that contained the link to the current page or file.<br>
+      (F.e. &lt;a href="../foo.html"&gt;LINKTEXT&lt;/a&gt;)
+      <br>
+      <b>Note:</b> Will NOT be available if disableExtendedLinkInfo() was set to true.</b>
+      <br><i>(since version 0.7)</i>
+      </td>
+      </tr>
+
+      <tr>
+      <td valign="top">refering_link_raw</td>
+      <td valign="top">string</td>
+      <td>Contains the raw link as it was found in the content of the refering URL.<br>
+      (F.e. "../foo.html")
+      <br>
+      <b>Note:</b> Will NOT be available if disableExtendedLinkInfo() was set to true.</b>
+      <br><i>(since version 0.7)</i>
+      </td>
+      </tr>
+
+      <tr>
+      <td valign="top">refering_linktext</td>
+      <td valign="top">string</td>
+      <td>The linktext of the link that "linked" to the current page or file.<br>
+      F.e. if the refering link was &lt;a href="../foo.html"&gt;LINKTEXT&lt;/a&gt;, the refering linktext is "LINKTEXT".
+      <br>
+      May contain html-tags of course.
+      <br>
+      <b>Note:</b> Will NOT be available if disableExtendedLinkInfo() was set to true.</b>
+      <br><i>(since version 0.7)</i>
+      </td>
+      </tr>
+      </table>
+
+      <br><br>
+
+      <b>Information about found links in the current page</b>
+      <table id="param_table" align="center" border="1">
+      <tr>
+      <td valign="top" width="130">links_found</td>
+      <td valign="top" width="60">Array</td>
+      <td width="410">
+      An numeric array with information about every link that was found in the current URL.
+      Every element of that numeric array contains the following elements again:
+      <br><br>
+      link_raw - contains the raw link as it was found.<br>
+      url_rebuild - contains the full qualified URL the link leads to<br>
+      linkcode - the html-codepart that contained the link.<br>
+      linktext - the linktext the link was layed over (may be empty).
+      <br><br>
+      So, f.e., $page_data[links_found][5][link_raw] contains the fifth
+      link that was found in the current page. (May be something like "../../foo.html").
+      <br><br>
+      <i>(since version 0.7)</i>
+      </td>
+      </tr>
+      </table>
+
+      <br><br>
+
+      <b>Error information</b>
+      <table id="param_table" align="center" border="1">
+      <tr>
+      <td valign="top" width="130">error_code</td>
+      <td valign="top" width="60">int</td>
+      <td width="410">A representating errorcode for a socket-connection-error that occured when trying to open the acutal page or file or
+      any other error that occured.<br>
+      It will be false if no error occured.</td>
+      </tr>
+
+      <tr>
+      <td valign="top">error_string</td>
+      <td valign="top">string</td>
+      <td>A string-description for a socket-connection-error that occured when trying to open the acutal page or file or
+      any other error that occured.<br>
+      It will be empty if no error occured.</td>
+      </tr>
+      </table>
+
+
+      </td>
+      </tr>
+      </table>
+    </p>
+    
+    <a name="addfollowmatch"></a>
+    <p id="methoddetail">bool addFollowMatch (string expression)</p>
+    <p>
+      Adds a perl-compatible regular expression (PCRE) to the list of rules that decide which URLs found on a page should be
+      followd explicitly.<br>
+      If no expression was added to this list, the crawler won't filter any URLs, every URL will be followed (except the ones "excluded"
+      by other options of course).<br><br>
+      This method returns TRUE if a valid preg-pattern is given as argument and was succsessfully added, otherwise it returns FALSE.
+      <br><br>
+      Example:<br>
+      $crawler->addFollowMatch("/.(html|htm)$/ i")<br><br>
+
+      This rule lets the crawler ONLY follow URLs/links that end with ".html" or ".htm". 
+      <br><br>
+      Note: To get very sure that the crawler only receives files with special filetypes you should use the
+      addReceiveContentType()-method.
+    </p>
+    
+    <a name="addnonfollowmatch"></a>
+    <p id="methoddetail">bool addNonFollowMatch (string expression)</p>
+    <p>
+      Adds a perl-compatible regular expression (PCRE) to the list of rules that decide which URLs found on a page should be
+      ignored by the crawler.
+      <br><br>
+      This method returns TRUE if a valid preg-pattern is given as argument and was succsessfully added, otherwise it returns FALSE.
+      <br><br>
+      Example:<br>
+      $crawler->addNonFollowMatch("/.(jpg|jpeg|gif|png|bmp)$/ i")<br><br>
+
+      This rule lets the crawler completly ignore all found URLs that end with ".jpg", ".gif", ".png" and so on.
+      None of the matching URLs will be followed or received. 
+      <br><br>
+      Note: To get very sure that the crawler only receives files with special filetypes you should use the
+      addReceiveContentType()-method. Use the addNonFollowMatch()-method just to "pre-filter" the URLs to reduce the
+      the number of requests the crawler will send.
+    </p>
+    
+    <a name="setfollowredirects"></a>
+    <p id="methoddetail">bool setFollowRedirects (bool mode)</p>
+    <p>
+      This method decides if the crawler should follow redirects sent in headers by a webserver or not.<br>
+      The default-value is TRUE.
+    </p>
+    
+    <a name="setfollowredirectstillcontent"></a>
+    <p id="methoddetail">bool setFollowRedirectsTillContent (bool mode)</p>
+    <p>
+      This method decides if the crawler should follow redirects until first content was found,
+      regardless of the follow-mode (method setFollowMode()).<br><br>
+      Sometimes when requesting an URL, the first thing the webserver does is sending a redirect to
+      another location, and sometimes the server of this new location is sending a redirect again and so on.
+      So at least its possible that you find the expected content on a totally different host.<br>
+      If you set this option to TRUE, the crawler will follow all these redirects until it finds some content.
+      If content finally was found under an URL, the root-url of the crawling-process will be set to this url and
+      all follow-mode-options will relate to it from now on.
+      <br><br>
+      The default-value is TRUE.
+    </p>
+    
+    <a name="addlinkpriority"></a>
+    <p id="methoddetail">bool addLinkPriority (string expression, int priority_level)</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      Adds a regular expression togehter with a priority-level to the list of rules that decide
+      which of the found links should be prefered (requested next).<br>
+      Links/URLs that match an expression with a high priority-level will be followed
+      before links with a lower level. All links that don't match with any of the given expressions
+      will get the level 0 (lowest level) automatically.
+      The level can be any positive integer, but try to avoid
+      very high numbers (like 10000 f.e., for preformance reasons).
+      <br><br>
+      This method returns TRUE if a valid preg-pattern is given as argument and was succsessfully added, otherwise it returns FALSE.
+      <br><br>
+      Example:
+      <br>
+      $crawler->addLinkPriority("/forum/", 10);<br>
+      $cralwer->addLinkPriority("/\.gif/", 5);
+      <br><br>
+      This lets the crawler follow links that contain the sting "forum" before links
+      that contain ".gif" before all other found links.
+    </p>
+    
+    <a name="obeyrobotstxt"></a>
+    <p id="methoddetail">bool obeyRobotsTxt (bool mode)</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      Decides if the crawler should parse and obey robots.txt-files.
+      <br><br>
+      If this is set to TRUE, the crawler looks for a robots.txt-file for every host that sites or files
+      should be received from during the crawling process.<br>
+      If a robots.txt-file for a host was found, the containig directives appliying to the
+      useragent-identification of the cralwer ("PHPCrawl" or manually set by calling setUserAgentString())
+      will be obeyed.<br>
+      The default-value is FALSE.
+      <br><br>
+      
+      Pleas note that the directives found in a robots.txt-file have a higher priority than other settings
+      made by the user.<br>
+      If i.e. addFollowMatch("#http://foo\.com/path/file\.html#") was set, but a directive in the robots.txt-file
+      of the host foo.com says "Disallow: /path/", the URL http://foo.com/path/file.html will be ignored by
+      the crawler anyway.
+      <br><br>
+      
+      Also note that currently only "Disallow"-directives of robots.txt-files will be interpreted.
+    </p>
+    
+    <a name="addreceivecontenttype"></a>
+    <p id="methoddetail">bool addReceiveContentType (string expression)</p>
+    <p>
+      Adds a perl-compatible regular expression (PCRE) to the list of rules that decide which pages
+      or files - regarding their content-type - should be received<br><br>
+      IMPORTANT: By default, if no expression was added to the list,  the crawler receives every content.
+      <br><br>
+      This method returns TRUE if a valid preg-pattern is given as argument and was succsessfully added, otherwise it returns FALSE.
+      <br><br>
+      Example:<br>
+      $crawler->addReceiveContentType("/text\/html/")<br><br>
+
+      This rule lets the crawler completly receive the content/source of pages with the Content-Type "text/html". Other pages or files
+      with different content-types (f.e. "image/gif") wont be received (if this is the only rule added to the list). 
+      <br><br>
+      Note: To reduce the traffic the crawler will cause, you only should add content-types of pages/files
+      you really want to receive. At least you should add the content-type "text/html" to this list, otherwise
+      the crawler can't find any links.
+    </p>
+    
+    <a name="settmpfile"></a>
+    <p id="methoddetail">bool setTmpFile (string path_to_tmpfile)</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      Sets the temporary file to use when content of found pages/files
+      should be streamed directly into a tmp-file (see also addReceiveToMemoryMatch()).<br>
+      By default, a temporary file with a uniqe filename will be created and used
+      in the path your script is running from.<br><br>
+
+      If the given file could be created, this function returns TRUE, otherwise it returns FALSE.
+    </p>
+    
+    <a name="addreceivetomemorymatch"></a>
+    <p id="methoddetail">bool addReceiveToMemoryMatch (string expression)</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      Adds an expression to the list of rules that decide which content
+      of found pages or files should be streamed directly into local memory.<br>
+      If a content-type of a found page/file matches with one of these expressions
+      and the content was be received, the content is accessable directly through
+      the array-element $page_data["source"] in the overridable method handlePageData().
+      <br><br>
+      IMPORTANT: By default, all files that should be received will be streamed
+      into memory (for compatibility reason) !
+      As soon as an expression is added the list will take effect.<br> 
+      The settings made here dont effect the link-finding-results in any way.
+      <br><br>
+      This method returns TRUE if a valid preg-pattern is given as argument and was succsessfully added, otherwise it returns FALSE.
+      <br>
+      <br>
+      Examples:<br><br>
+      $crawler->addReceiveToMemoryMatch ("/.*/");<br>
+      This is the default setting, everything will be streamed to memory.
+      <br><br>
+      $crawler->addReceiveToMemoryMatch ("/text\/html/");<br>
+      Only files with content-type "text/html" will be streamed to memory.
+      <br><br>
+      $crawler->addReceiveToMemoryMatch("/^((?!image).)*$/");<br>
+      Everything except images (f.e. "image/gif") will be streamed to memory.
+      <br><br>
+      $crawler->addReceiveToMemoryMatch ("/(?!)/");<br>
+      Nothing will be streamed to memory.
+      <br>
+      <br>
+      If you configure the crawler to receive big files (addReceiveContentType(), setContentSizeLimit() etc), you should get sure that this files
+      will be streamed to a tmp-file, NOT to memory.
+    </p>
+    
+    <a name="addreceivetotmpfilematch"></a>
+    <p id="methoddetail">bool addReceiveToTmpFileMatch (string expression)</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      Adds an expression to the list of rules that decide which content
+      of found pages or files should be streamed into a temporary file.<br>
+      If a content-type of a found page/file matches with one of these expressions
+      and the content was be received, the content will be stored in the temporary file
+      $page_data["content_tmp_file"].<br>
+      You can set this temporary file manually with the function setTmpFile().
+      <br><br>
+      This method returns TRUE if a valid preg-pattern is given as argument and was succsessfully added, otherwise it returns FALSE.
+      <br><br>
+      The settings made here dont effect the link-finding-results in any way.
+      <br>
+      <br>
+      Examples:<br><br>
+      $crawler->addReceiveToTmpFileMatch("/.*/");<br>
+      Everything will be streamed to the tmp-file.
+      <br><br>
+      $crawler->addReceiveToTmpFileMatch("/image/");<br>
+      Files with content-type "image/jpeg" or "image/gif" f.e. will be streamed to the tmp-file.
+      <br>
+      <br>
+      If you configure the crawler to receive big files (addReceiveContentType(), setContentSizeLimit() etc), you should get sure that this files
+      will be streamed to a tmp-file, NOT to memory.
+    </p>
+    
+    <a name="setpagelimit"></a>
+    <p id="methoddetail">bool setPageLimit (int limit, [bool count_mode=true])</p>
+    <p>
+      Sets the limit of pages/files the crawler should crawl. If the limit is reached, the crawler
+      stops the crawling-process. The default-value is 0 (no limit).<br><br>
+      The count-mode decides, which pages/files should be counted.<br>
+      TRUE means that only that pages
+      will be counted that the crawler received
+      (see also addReceiveContentType()-method).<br>
+      FALSE means that ALL followed pages/files will be counted, even if the content
+      wasn't be received.
+      <br>
+      The default-value for count_mode is TRUE.
+    </p>
+    
+    <a name="settrafficlimit"></a>
+    <p id="methoddetail">bool setTrafficLimit (int bytes, [bool complete_requested_files=true]))</p>
+    <p>
+      Sets the limit of bytes the crawler should crawl and receive (all in all). If the limit is reached, the crawler
+      stops the crawling-process.<br>
+      The default-value is 0 (no limit).<br><br>
+      The flag complete_requested_files decides if already requested files and pages should be received completly, even if the traffic-limit is reached.<br>
+      If this is set to TRUE, the crawler finishes receiving these requested files and then stops crawling.<br>
+      If this is set to FALSE, the process will stop exactly when the traffic-limit is reached, even if a requested file or page wasn't
+      received completly.
+      <br><br>
+      Note: Crawling a complete, huge website can cause A LOT OF TRAFFIC, especially if the crawler follows
+      and recieves all kind of data (binary files, pictures etc., see addReceiveContentType() and addNonFollowMatch()-methods).<br>
+      So it is recommenden that you set a traffic-limit!
+    </p>
+    
+    <a name="setcontentsizelimit"></a>
+    <p id="methoddetail">bool setContentSizeLimit (int bytes)</p>
+    <p>
+      Sets the content-size-limit per page/file in bytes for content the crawler should receive.
+      If the crawler is receiving the content of a page or file (see addReceiveContentType()) and
+      the contentsize-limit is reached, the crawler stops receiving content from this page or file.<br>
+      The default-value is 0 (no limit).
+    </p>
+    
+    <a name="setaggressivelinkextraction"></a>
+    <p id="methoddetail">bool setAggressiveLinkExtraction (bool mode)</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      Enables or disables agressive link-extraction.<br>
+      If this is set to FALSE, the crawler tries to find links only inside
+      html-tags (&lt; and &gt;).<br>
+      If this is set to TRUE, the crawler tries to find links everywhere in an html-page. (script-parts, content-text etc.)<br>
+      The default value is TRUE.
+      <br><br>
+      Note:
+      If agressive-link-extraction is enabled, it happens that the crawler finds links
+      that are not meant as links and it also happens that it finds links in script-parts of pages
+      that can't be rebuild correctly - since there is no javascript-parser/interpreter implemented.
+      (F.e. javascript-code like document.location.href= a_var + ".html").<br><br>
+      Disabling agressive-link-extraction also results in a better crawling-performance.
+    </p>
+    
+    <a name="setlinkextractiontags"></a>
+    <p id="methoddetail">bool setLinkExtractionTags (array tag_array)</p>
+    <p>
+      <i>(since verion 0.71)</i>
+      <br><br>
+      Sets the list of html-tags the crawler should search for links in. (case unsensitive).<br>
+      
+      By default the crawler extracts links from the followubng html-tags:<br>
+      href, src, url, location, codebase, background, data, profile, action and open.
+      <br><br>
+      Example:<br>
+      $crawler->addLinkExtractionTags(array("href", "src"));
+      <br><br>
+      This setting lets the crawler extract links (only) from "href" and "src"-tags.
+      <br><br>
+      Note:
+      Reducing the number of tags in this list will improve the crawling-performance (a little).
+    </p>
+    
+    <a name="addlinkextractiontags"></a>
+    <p id="methoddetail">bool addLinkExtractionTags (string tag1, [string tag2, [string ...]]) DEPRECATED!</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      This method is <b>DEPRECATED!</b> Please use <a href="#setlinkextractiontags">setLinkExtractionTags()</a> instead.<br><br>
+      This method was named WRONG in previous versions because it doen't ADD tags to the list, it
+      OVERWRITES the list.<br><br>
+      The method just still exists because of compatibility-reasons.
+    </p>
+    
+    <a name="setconnectiontimeout"></a>
+    <p id="methoddetail">bool setConnectionTimeout (double timeout)</p>
+    <p>
+      Sets the timeout in seconds for the request of a page or file (connection to the server).<br>
+      The default-value is 10 seconds.
+      <br><br>
+      Note: Currently this timeout doesn't take effect in some enviroments.
+    </p>
+    
+    <a name="setstreamtimeout"></a>
+    <p id="methoddetail">bool setStreamTimeout (double timeout)</p>
+    <p>
+      Sets the timeout in seconds for reading data (content) of a page or file.
+      If the connection to a server was be etablished but the server doesnt't send data
+      anymore without closing the connection, the crawler will wait the time given in timeout
+      and then close the connection.<br>
+      <br>
+      The default-value is 2 seconds.
+    </p>
+    
+    <a name="setcookiehandling"></a>
+    <p id="methoddetail">bool setCookieHandling (bool mode)</p>
+    <p>
+      Enables or disables cookie-handling.<br>
+      If the cookie-handling is set to TRUE, the crawler will handle all cookies sent
+      by the webserver just like a common browser does. (At least almost)<br>
+      The default-value is TRUE.
+      <br><br>
+      Note: It is strongly recommended that you enable cookie-handling. Otherwise it happens
+      that special single pages will be crawled, followed and received over and over again (kind of endless loop).
+      This can happen f.e. if the webserver sends a session-cookie and puts the session-ID at the end of some or all links.
+      Now, without cookie-handling, the server generates new session-IDs and sends new session-cookies at every request of
+      the crawler beacuase the crawler didn't store and doesn't "send back" the session-data. TRAP !
+    </p>
+    
+    <a name="addbasicauthentication"></a>
+    <p id="methoddetail">bool addBasicAuthentication (string expr, string username, string passwd)</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      Adds an authentication (username and password) to the list of basic authentications that will be send with requests for
+      special pages and files (password protected content).
+      The expression (PCRE) specifys for which URLs the given authentication should be send.
+
+      <br><br>
+      Example:<br>
+      $crawler->addBasicAuthentication("#http://www.foo.com/protected_path/#", "myusername", "mypasswd");
+      <br><br>
+      This lets the crawler send the authentication "myusername/mypassw" with every request for
+      content placed in the path "protected_path" on host "www.foo.com".
+    </p>
+    
+    <a name="disableextendedlinkinfo"></a>
+    <p id="methoddetail">bool disableExtendedLinkInfo (bool mode)</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      Disables the storage of extended link-information of found links like the html-linkcodes, the linktexts etc.
+      Disabling the caching reduces the memory-usage of the crawler more than 50% in some cases, but the extended
+      information will not be passed to the overridable user-method handlePageData() anymore. So if you don't need
+      this information, you should set this option to TRUE.
+      <br>
+      The default value is FALSE.
+    </p>
+    
+    <a name="setuseragentstring"></a>
+    <p id="methoddetail">bool setUserAgentString (string user_agent)</p>
+    <p>
+      <i>(since verion 0.7)</i>
+      <br><br>
+      Sets the "User-Agent" identification-string in the header that will be send with HTTP-requests.<br>
+      The default-value is "PHPCrawl".
+      <br><br>
+      Note:<br>
+      It is REALLY recommended to identify yourself and/or your application with this setting, i.e.<br>
+      "XYZSiteIndexer (myemail@address.net)", so that webmasters and administrators have a chance to track
+      who is spidering their websites and who is getting content from their servers.<br>
+      Please stay fair!
+    </p>
+    
+    <a name="addlinksearchcontenttype"></a>
+    <p id="methoddetail">bool addLinkSearchContentType (string regex)</p>
+    <p>
+      <i>(since verion 0.71)</i>
+      <br><br>
+      Adds a rule to the list of rules that decide in what kind of documents the crawler
+      should search for links in (according to their content/mime-type) 
+      <br><br>
+      By default the crawler ONLY searches for links in documents of type "text/html".
+      Use this method to add one or more other content-types the crawler should check for links.
+      <br><br>
+      Example:<br>
+      $crawler->addLinkSearchContentType("#text/css# i");<br>
+      $crawler->addLinkSearchContentType("#text/xml# i");
+      <br><br>
+      These rules let the crawler search for links in HTML-, CSS- ans XML-documents.
+      <br><br>
+      <b>Please note</b>: It is NOT recommended to let the crawler checkfor links in EVERY document-
+      type! This could slow down the crawling-process dramatically (e.g. if the crawler receives large
+      binary-files like images and tries to find links in them). 
+    </p>
+
+  </div>
+
+
+</body>
+</html>

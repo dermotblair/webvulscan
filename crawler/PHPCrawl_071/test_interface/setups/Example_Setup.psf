@@ -1,0 +1,19 @@
+a:3:{s:5:"setup";a:23:{s:6:"setURL";s:29:"http://www.php.net/manual/en/";s:7:"setPort";s:0:"";s:13:"setFollowMode";s:1:"3";s:18:"setFollowRedirects";s:1:"1";s:29:"setFollowRedirectsTillContent";s:1:"1";s:17:"setCookieHandling";s:1:"1";s:27:"setAggressiveLinkExtraction";s:1:"1";s:13:"obeyRobotsTxt";s:1:"0";s:12:"setPageLimit";s:0:"";s:15:"setTrafficLimit";s:0:"";s:19:"setContentSizeLimit";s:0:"";s:20:"setConnectionTimeout";s:0:"";s:16:"setStreamTimeout";s:0:"";s:21:"addReceiveContentType";a:3:{i:0;s:11:"#text/html#";i:1;s:0:"";i:2;s:0:"";}s:14:"addFollowMatch";a:3:{i:0;s:27:"#refs\.(database|xml)\.php#";i:1;s:17:"#[^\w]mysql[^\w]#";i:2;s:21:"#[^\w]simplexml[^\w]#";}s:17:"addNonFollowMatch";a:3:{i:0;s:10:"#add-note#";i:1;s:8:"#source#";i:2;s:0:"";}s:15:"addLinkPriority";a:3:{i:0;a:2:{i:0;s:5:"#xml#";i:1;s:1:"1";}i:1;a:2:{i:0;s:0:"";i:1;s:0:"";}i:2;a:2:{i:0;s:0:"";i:1;s:0:"";}}s:24:"addReceiveToTmpFileMatch";a:3:{i:0;s:0:"";i:1;s:0:"";i:2;s:0:"";}s:23:"addReceiveToMemoryMatch";a:3:{i:0;s:0:"";i:1;s:0:"";i:2;s:0:"";}s:21:"addLinkExtractionTags";a:9:{i:0;s:0:"";i:1;s:0:"";i:2;s:0:"";i:3;s:0:"";i:4;s:0:"";i:5;s:0:"";i:6;s:0:"";i:7;s:0:"";i:8;s:0:"";}s:22:"addBasicAuthentication";a:3:{i:0;a:3:{i:0;s:0:"";i:1;s:0:"";i:2;s:0:"";}i:1;a:3:{i:0;s:0:"";i:1;s:0:"";i:2;s:0:"";}i:2;a:3:{i:0;s:0:"";i:1;s:0:"";i:2;s:0:"";}}s:10:"setTmpFile";s:0:"";s:18:"setUserAgentString";s:0:"";}s:6:"output";a:4:{s:13:"requested_url";s:1:"1";s:16:"http_status_code";s:1:"1";s:11:"referer_url";s:1:"1";s:17:"refering_linktext";s:1:"1";}s:4:"misc";a:2:{s:7:"comment";s:1497:"Just an example-setup:
+
+This setup lets the crawler go to the root-page of the php-manual and spider the two sub-chapters &quot;Simplexml&quot; and &quot;MySql&quot;.
+
+First the crawler has to follow the two main-chaptes &quot;XML Manipulation&quot; (link conatins &quot;refs.xml.php&quot;) and &quot;Database Extensions&quot;  (link conatins &quot;refs.database.php&quot;), so a regular-expression was added to the follow-rules correspondingly.
+
+Within this tow chapters the crawler should only follow links containing &quot;mysql&quot; or &quot;simplexml&quot; since we are not interested in other database- or XML-subchapters like &quot;Oracle&quot;.
+
+Every doc-page of the php-manual contains the links &quot;Add Note&quot; (add-note.php) and &quot;Show source&quot; (source.php), but we are not interested in these links, so they were added to the non-follow-rules.
+
+At least, to show how the link-priority-option works, we want the crawler first to get all pages from the chapter &quot;SimpleXml&quot; and afterwards the chapter &quot;MySql&quot;, so the string &quot;xml&quot; was added to the link-priority-list (that means all links containing the string &quot;xml&quot; will get preferred).
+
+
+PLEASE DONT&#039;T RUN THE CRAWLER WITH THIS SETUP TOO OFTEN SINCE IT CAUSES TRAFFIC ON PHP.NET!
+Just change the site here and now for testing.
+
+Also note that the php.net-server(s) are somewhat slow sometimes so you may want to choose other sites for testing anyway.
+
+Thanks!";s:11:"force_flush";s:1:"1";}}
