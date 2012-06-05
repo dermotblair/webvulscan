@@ -41,52 +41,50 @@
 // without authorisation is unethical and against the law in many countries.
 //
 /////////////////////////////////////////////////////////////////////////////
-
+set_time_limit(0);
 error_reporting(E_ALL);
-require_once('functions/databaseFunctions.php');
+
+$currentDir = './';
 
 // Inculde the phpcrawl-mainclass
-require_once("../crawler/PHPCRAWL_071/classes/phpcrawler.class.php");
-require_once("../crawler/PHPCRAWL_071/classes/mycrawler.php");
+require_once($currentDir . "../crawler/PHPCrawl_071/classes/phpcrawler.class.php");
+require_once($currentDir . "../crawler/PHPCrawl_071/classes/mycrawler.php");
 
 //Include parsing class and http library
-require_once('classes/simplehtmldom/simple_html_dom.php');
-//require_once('HTTPclasses/HTTPclient/HTTPClient.class.php');
-require_once('classes/httpclient-2011-08-21/http.php');
+require_once($currentDir . 'classes/simplehtmldom/simple_html_dom.php');
+require_once($currentDir . 'classes/httpclient-2011-08-21/http.php');
 
 //Include Entity Classes
-require_once('classes/Form.php');
-require_once('classes/InputField.php');
-require_once('classes/Logger.php');
-require_once('classes/PostOrGetObject.php');
-require_once('classes/Vulnerability.php');
+require_once($currentDir . 'classes/Form.php');
+require_once($currentDir . 'classes/InputField.php');
+require_once($currentDir . 'classes/Logger.php');
+require_once($currentDir . 'classes/PostOrGetObject.php');
+require_once($currentDir . 'classes/Vulnerability.php');
 
 //Include Function Scripts
-require_once('functions/commonFunctions.php');
-require_once('functions/databaseFunctions.php');
-require_once('functions/createPdfReport.php');
-require_once('functions/emailPdfToUser.php');
+require_once($currentDir . 'functions/commonFunctions.php');
+require_once($currentDir . 'functions/databaseFunctions.php');
+require_once($currentDir . 'functions/createPdfReport.php');
+require_once($currentDir . 'functions/emailPdfToUser.php');
 
 //Include test scripts
-require_once('tests/testForReflectedXSS.php');
-require_once('tests/testForStoredXSS.php');
-require_once('tests/testForSQLi.php');
-require_once('tests/testDirectObjectRefs.php');
-require_once('tests/testAuthenticationSQLi.php');
-require_once('tests/testUnvalidatedRedirects.php');
-require_once('tests/testDirectoryListingEnabled.php');
-require_once('tests/testHttpBannerDisclosure.php');
-require_once('tests/testAutoComplete.php');
-require_once('tests/testSslCertificate.php');
+require_once($currentDir . 'tests/testForReflectedXSS.php');
+require_once($currentDir . 'tests/testForStoredXSS.php');
+require_once($currentDir . 'tests/testForSQLi.php');
+require_once($currentDir . 'tests/testDirectObjectRefs.php');
+require_once($currentDir . 'tests/testAuthenticationSQLi.php');
+require_once($currentDir . 'tests/testUnvalidatedRedirects.php');
+require_once($currentDir . 'tests/testDirectoryListingEnabled.php');
+require_once($currentDir . 'tests/testHttpBannerDisclosure.php');
+require_once($currentDir . 'tests/testAutoComplete.php');
+require_once($currentDir . 'tests/testSslCertificate.php');
 
 //Include PDF generator
-require_once('classes/tcpdf/config/lang/eng.php');
-require_once('classes/tcpdf/tcpdf.php');
-
-set_time_limit(0);
+require_once($currentDir . 'classes/tcpdf/config/lang/eng.php');
+require_once($currentDir . 'classes/tcpdf/tcpdf.php');
 
 $log = new Logger();
-$log->lfile('logs/eventlogs');
+$log->lfile($currentDir . 'logs/eventlogs');
 
 $log->lwrite('Connecting to database');
 

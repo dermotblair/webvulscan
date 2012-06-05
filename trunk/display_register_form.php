@@ -41,7 +41,7 @@
 // without authorisation is unethical and against the law in many countries.
 //
 /////////////////////////////////////////////////////////////////////////////
-
+$currentDir = './';
 $displayForm = true;
 
 if(isset($_SESSION['username']))
@@ -123,5 +123,5 @@ else
 	}
 }
 if($displayForm)
-	require_once('register_form.html');
+	require_once($currentDir . 'register_form.html');
 ?>

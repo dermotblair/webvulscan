@@ -41,8 +41,8 @@
 // without authorisation is unethical and against the law in many countries.
 //
 /////////////////////////////////////////////////////////////////////////////
-
-require_once('functions/databaseFunctions.php');
+$currentDir = './';
+require_once($currentDir . 'functions/databaseFunctions.php');
 //require_once('classes/Logger.php');
 
 isset($_POST['testId']) ? $testId = $_POST['testId'] : $testId = 0;

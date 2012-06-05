@@ -44,27 +44,28 @@
 set_time_limit(0);
 error_reporting(E_ALL);
 
+$currentDir = './';
+
 // Inculde the phpcrawl-mainclass
-require_once("PHPCRAWL_071/classes/phpcrawler.class.php");
-require_once("PHPCRAWL_071/classes/mycrawler.php");
+require_once($currentDir . "PHPCrawl_071/classes/phpcrawler.class.php");
+require_once($currentDir . "PHPCrawl_071/classes/mycrawler.php");
 
 //Include parsing class and http library
-require_once('../scanner/classes/simplehtmldom/simple_html_dom.php');
-//require_once('HTTPclasses/HTTPclient/HTTPClient.class.php');
-require_once('../scanner/classes/httpclient-2011-08-21/http.php');
+require_once($currentDir . '../scanner/classes/simplehtmldom/simple_html_dom.php');
+require_once($currentDir . '../scanner/classes/httpclient-2011-08-21/http.php');
 
 //Include Entity Classes
-require_once('../scanner/classes/Form.php');
-require_once('../scanner/classes/InputField.php');
-require_once('../scanner/classes/Logger.php');
-require_once('../scanner/classes/PostOrGetObject.php');
+require_once($currentDir . '../scanner/classes/Form.php');
+require_once($currentDir . '../scanner/classes/InputField.php');
+require_once($currentDir . '../scanner/classes/Logger.php');
+require_once($currentDir . '../scanner/classes/PostOrGetObject.php');
 
 //Include Function Scripts
-require_once('../scanner/functions/commonFunctions.php');
-require_once('../scanner/functions/databaseFunctions.php');
+require_once($currentDir . '../scanner/functions/commonFunctions.php');
+require_once($currentDir . '../scanner/functions/databaseFunctions.php');
 
 $log = new Logger();
-$log->lfile('logs/eventlogs');
+$log->lfile($currentDir . 'logs/eventlogs');
 
 $log->lwrite('Connecting to database');
 

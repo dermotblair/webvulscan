@@ -41,7 +41,8 @@
 // without authorisation is unethical and against the law in many countries.
 //
 /////////////////////////////////////////////////////////////////////////////
-require_once('../scanner/functions/databaseFunctions.php');
+$currentDir = './';
+require_once($currentDir . '../scanner/functions/databaseFunctions.php');
 
 isset($_POST['testId']) ? $testId = $_POST['testId'] : $testId = 0;
 

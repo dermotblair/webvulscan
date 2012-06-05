@@ -8,7 +8,8 @@
 
  //May have to change this address when doing units tests of vulnerability tests (testing the scripts
  //on their own). Add another '/..' to start e.g. 'require_once('/../../scanner/functions/databaseFunctions.php');'
-require_once('/../scanner/functions/databaseFunctions.php');
+$currentDir = './';
+require_once($currentDir . '../scanner/functions/databaseFunctions.php');
  
 class http_class
 {
