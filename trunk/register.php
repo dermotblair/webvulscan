@@ -42,8 +42,8 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 session_start();
-$currentDir = '.';
-require_once($currentDir . '/scanner/functions/databaseFunctions.php');
+$currentDir = './';
+require_once($currentDir . 'scanner/functions/databaseFunctions.php');
 ?>
 <!DOCTYPE html>
 <head>
@@ -61,7 +61,6 @@ require_once($currentDir . '/scanner/functions/databaseFunctions.php');
     <!--Menu Begin-->
 	<div id="menu">
 	<?php 
-	$currentDir = './';
 	require_once($currentDir . 'session_control.php'); 
 	?>
 	</div>
