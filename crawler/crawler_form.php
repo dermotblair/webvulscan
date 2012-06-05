@@ -49,9 +49,9 @@ function beginCrawl(value, valueTwo){
 
 </script>
 <?php 
-
-require_once('scanner/functions/databaseFunctions.php');
-require_once('scanner/classes/Logger.php');
+$currentDir = './';
+require_once($currentDir . 'scanner/functions/databaseFunctions.php');
+require_once($currentDir . 'scanner/classes/Logger.php');
 		
 if(isset($_SESSION['username']))
 {

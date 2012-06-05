@@ -21,8 +21,8 @@
 // Boston, MA 02111-1307, USA.
 //
 /////////////////////////////////////////////////////////
-
-require_once('/../../../scanner/functions/databaseFunctions.php');
+$currentDir = './';
+require_once($currentDir . '../scanner/functions/databaseFunctions.php');
 
 class PHPCrawler
 {  

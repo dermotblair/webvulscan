@@ -59,7 +59,8 @@ define('HDOM_INFO_ENDSPACE',7);
 define('DEFAULT_TARGET_CHARSET', 'UTF-8');
 define('DEFAULT_BR_TEXT', "\r\n");
 
-require_once('/../../../scanner/functions/databaseFunctions.php');
+$currentDir = './';
+require_once($currentDir . '../scanner/functions/databaseFunctions.php');
 
 // helper functions
 // -----------------------------------------------------------------------------

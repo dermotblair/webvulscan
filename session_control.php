@@ -41,7 +41,7 @@
 // without authorisation is unethical and against the law in many countries.
 //
 /////////////////////////////////////////////////////////////////////////////
-
+$currentDir = './';
 $loginMsg = '';
 
 if(isset($_GET['action']))
@@ -109,5 +109,5 @@ if(isset($_SESSION['username']))
 }
 else
 {
-	require_once('login_form.html');
+	require_once($currentDir . 'login_form.html');
 }

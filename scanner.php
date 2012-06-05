@@ -42,7 +42,8 @@
 //
 /////////////////////////////////////////////////////////////////////////////
 session_start();
-require_once('/scanner/functions/databaseFunctions.php');
+$currentDir = './';
+require_once($currentDir . 'scanner/functions/databaseFunctions.php');
 ?>
 <!DOCTYPE html>
 <head>
@@ -59,7 +60,7 @@ require_once('/scanner/functions/databaseFunctions.php');
     <div id="logo"><a href="#">WebVulScan</a></div>
     <!--Menu Begin-->
 	<div id="menu">
-	<?php require_once('session_control.php'); ?>
+	<?php require_once($currentDir . 'session_control.php'); ?>
 	</div>
     <div id="menu">
       <ul>
@@ -85,7 +86,7 @@ require_once('/scanner/functions/databaseFunctions.php');
 <div id="midrow">
   <div class="center">
     <div class="textbox2">
-      <p><?php require_once('scanner/scanner_form.php'); ?></p>
+      <p><?php require_once($currentDir . 'scanner/scanner_form.php'); ?></p>
     </div>
   </div>
 </div>
