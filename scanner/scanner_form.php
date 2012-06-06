@@ -83,7 +83,7 @@ if(isset($_SESSION['username']))
 		<div id=tbl name=tbl style="overflow:hidden;display:none">
 		Please select which vulnerabilities to test for:<br>
 		<input type="checkbox" name="rxss" value="rxss" checked />Reflected Cross-Site Scripting<br>
-		<input type="checkbox" name="sxss" value="sxss" checked />Stored Cross-Site Scripting<br>
+		<input type="checkbox" name="sxss" value="sxss" checked />Stored Cross-Site Scripting (Warning: can be time consuming and can take longer that all of the other tests combined together)<br>
 		<input type="checkbox" name="sqli" value="sqli" checked />Standard SQL Injection<br>
 		<input type="checkbox" name="basqli" value="basqli" checked />Broken Authentication using SQL Injection<br>
 		<input type="checkbox" name="autoc" value="autoc" checked />Autocomplete enabled on sensitive input fields<br>
@@ -92,6 +92,8 @@ if(isset($_SESSION['username']))
 		<input type="checkbox" name="bannerdis" value="bannerdis" checked />HTTP Banner Disclosure<br>
 		<input type="checkbox" name="sslcert" value="sslcert" checked />SSL Certificate not trusted<br>
 		<input type="checkbox" name="unredir" value="unredir" checked />Unvalidated Redirects<br>
+		<br>Other Options:<br>
+		<input type="checkbox" name="emailpdf" value="emailpdf" checked />Email PDF Report - If this is disabled, the PDF report will not be emailed to you but you can view/download it in your scan history<br>
 		</div>
 		<p>
 		  <input type="submit" class="button" name="submit" id="submit" value="Start Scan" />
@@ -127,6 +129,7 @@ if(isset($_SESSION['username']))
 		if(isset($_POST['bannerdis'])) $testCases .= $_POST['bannerdis'] . ' ';
 		if(isset($_POST['sslcert'])) $testCases .= $_POST['sslcert'] . ' ';
 		if(isset($_POST['unredir'])) $testCases .= $_POST['unredir'] . ' ';
+		if(isset($_POST['emailpdf'])) $testCases .= $_POST['emailpdf'] . ' ';
 	
 		$urlToScan = trim($_POST['urlToScan']);
 		if(!empty($urlToScan))
