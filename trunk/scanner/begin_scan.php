@@ -273,33 +273,10 @@ if(stristr($testCases,' basqli ') !== false)
 
 if(stristr($testCases,' sxss ') !== false)
 {
-	//Test all URLs for Stored Cross-Site Scripting
-	
-	/*$logDebug = new Logger();
-	$logDebug->lfile("debuglogs$testId");
-	$count = 0;*/
-
 	$log->lwrite('Beginning Stored XSS testing on each of the URLs');
 	for($i=0; $i<sizeof($urlsFound); $i++)
 	{
-		/*$sql = "select * from tests where id = $testId";
-		$res = $db->query($sql);
-		$row = $res->fetch_object();
-		$httpReqsBefore = $row->num_requests_sent;*/
-	
-		testForStoredXSS($urlsFound[$i], $urlsFound[0], $testId, $urlsFound);
-		
-		/*$sql = "select * from tests where id = $testId";
-		$res = $db->query($sql);
-		$row = $res->fetch_object();
-		$httpReqsAfter = $row->num_requests_sent;
-		$uri = $urlsFound[$i];
-		
-		$numSent = $httpReqsAfter - $httpReqsBefore;
-		$count += $numSent;
-		$logDebug->lwrite("$numSent requests sent testing $uri");
-		$logDebug->lwrite("Total so far is $count");*/
-		
+		testForStoredXSS($urlsFound[$i], $urlsFound[0], $testId, $urlsFound);		
 	}
 	$log->lwrite('Finished Stored XSS testing of all URLS for test: ' . $testId);
 	updateStatus($db, "Finished Stored Cross-Site Scripting testing...", $testId);
@@ -311,16 +288,22 @@ createPdfReport($testId, $fileName);
 $log->lwrite('Finished creating PDF report for test: ' . $testId);
 updateStatus($db, "Finished creating PDF report...", $testId);
 
-//Email PDF report
-$log->lwrite('Beginning emailing PDF report to $email for test: ' . $testId);
-emailPdfToUser($fileName, $username, $email, $testId);
-$log->lwrite('Finished emailing PDF report to $email for test: ' . $testId);
-updateStatus($db, "Finished emailing PDF report...", $testId);
+if(stristr($testCases,' emailpdf ') !== false)
+{
+	//Email PDF report
+	$log->lwrite('Beginning emailing PDF report to $email for test: ' . $testId);
+	emailPdfToUser($fileName, $username, $email, $testId);
+	$log->lwrite('Finished emailing PDF report to $email for test: ' . $testId);
+	updateStatus($db, "Finished emailing PDF report...", $testId);
+}
 
 $query = "UPDATE tests SET scan_finished = 1 WHERE id = $testId;"; 
 $result = $db->query($query);
 
-updateStatus($db, "Scan is complete! The report has been emailed to you and is also in your scan history.", $testId);
-
+if(stristr($testCases,' emailpdf ') !== false)
+	updateStatus($db, "Scan is complete! The report has been emailed to you and is also in your scan history.", $testId);
+else
+	updateStatus($db, "Scan is complete! The report is in your scan history.", $testId);
+	
 $db->close();
 ?>
