@@ -70,61 +70,63 @@ require_once("../../crawler/PHPCRAWL_071/classes/mycrawler.php");
 testDirectoryListingEnabled('http://localhost/testsitewithvulns/' ,500);//Just for testing
 */
 
-function testDirectoryListingEnabled($urlToScan, $testId){
+function testDirectoryListingEnabled($urlToScan, $siteBeingTested, $testId, $crawlUrlFlag){
 
 connectToDb($db);
 updateStatus($db, "Testing for $urlToScan for Directory Listing enabled...", $testId);
 
 $log = new Logger();
 $log->lfile('logs/eventlogs');
-
 $log->lwrite("Testing for $urlToScan for Directory Listing enabled");
 
-//Perform crawl again but allow images, etc. this time to capture every URL
-$crawlerNew = &new MyCrawler();
-$crawlerNew->setURL($urlToScan);
-$crawlerNew->setTestId($testId);
-$crawlerNew->addReceiveContentType("/text\/html/");
-$crawlerNew->setCookieHandling(true);
-$crawlerNew->setFollowMode(3);
-
-$log->lwrite("Crawling $urlToScan again for all links including images, css, etc, in order to identify directories");
-$crawlerNew->go();
-
-$urlsFound = $crawlerNew->urlsFound;
-
-$logStr = sizeof($urlsFound) . ' URLs found for test: ' . $testId;
-
-$log->lwrite("All URLs found during crawl for directory listing check:");
-foreach($urlsFound as $currentUrl)
+if($crawlUrlFlag)
 {
-	$log->lwrite($currentUrl);
-}
+	//Perform crawl again but allow images, etc. this time to capture every URL
+	$crawlerNew = &new MyCrawler();
+	$crawlerNew->setURL($urlToScan);
+	$crawlerNew->setTestId($testId);
+	$crawlerNew->addReceiveContentType("/text\/html/");
+	$crawlerNew->setCookieHandling(true);
+	$crawlerNew->setFollowMode(3);
+	$log->lwrite("Crawling $urlToScan again for all links including images, css, etc, in order to identify directories");
+	$crawlerNew->go();
+	$urlsFound = $crawlerNew->urlsFound;
 
-$relativePathUrls = array();
+	$logStr = sizeof($urlsFound) . ' URLs found for test: ' . $testId;
 
-foreach($urlsFound as $currentUrl)
-{
-	$currentUrl = str_replace($urlToScan,'', $currentUrl);
-	array_push($relativePathUrls,$currentUrl);
-}
-
-$directories = array();
-
-//Check if relative path contain a directory and if they do, add it to a list of directories
-foreach($relativePathUrls as $relativePathUrl)
-{
-	if(dirname($relativePathUrl) != '.')
+	$log->lwrite("All URLs found during crawl for directory listing check:");
+	foreach($urlsFound as $currentUrl)
 	{
-		$dir = dirname($relativePathUrl);
-									
-		if(!in_array($dir, $directories) && !empty($dir) && (!strpos($dir,'?')))
+		$log->lwrite($currentUrl);
+	}
+
+	$relativePathUrls = array();
+
+	foreach($urlsFound as $currentUrl)
+	{
+		$currentUrl = str_replace($urlToScan,'', $currentUrl);
+		array_push($relativePathUrls,$currentUrl);
+	}
+
+	$directories = array();
+
+	//Check if relative path contain a directory and if they do, add it to a list of directories
+	foreach($relativePathUrls as $relativePathUrl)
+	{
+		if(dirname($relativePathUrl) != '.')
 		{
-			array_push($directories, $dir);
-			$log->lwrite("Found directory $dir");
+			$dir = dirname($relativePathUrl);
+										
+			if(!in_array($dir, $directories) && !empty($dir) && (!strpos($dir,'?')))
+			{
+				array_push($directories, $dir);
+				$log->lwrite("Found directory $dir");
+			}
 		}
 	}
 }
+else
+	$directories = array(1);//Just need to make an array of size one so the for loop below iterates once
 
 $http = new http_class;
 $http->timeout=0;
@@ -144,7 +146,10 @@ $regexs = array("/Parent Directory/", //Microsoft IIS
 				
 foreach($directories as $directory)
 {
-	$testUrl = $urlToScan . $directory . '/';
+	if($crawlUrlFlag)
+		$testUrl = $urlToScan . $directory . '/';
+	else
+		$testUrl = $siteBeingTested;
 	
 	$error=$http->GetRequestArguments($testUrl,$arguments);
 						
