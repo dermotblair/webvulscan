@@ -54,6 +54,25 @@ function sizeTbl(h) {
   tbl.style.display = h;
 }
 
+checked=true;
+function checkedAll (form1) 
+{
+	var aa = document.getElementById('form1');
+	if (checked == true)
+    {
+        checked = false
+    }
+    else
+    {
+        checked = true
+    }
+	for (var i =0; i < aa.elements.length; i++) 
+	{
+	 aa.elements[i].checked = checked;
+	}
+}
+
+
 </script>
 
 <?php 
@@ -79,46 +98,39 @@ if(isset($_SESSION['username']))
 		  <label for="urlToScan"></label>
 		  <input type="text" size="40" name="urlToScan" id="urlToScan" />
 		<br>
-		<a href="javascript:sizeTbl('block')">Options</a></p>
+		<a href="javascript:sizeTbl('block')"><font size="3">Options</font></a></p>
 		<div id=tbl name=tbl style="overflow:hidden;display:none">
+		<a href="javascript:checkedAll(form1)"><font size="3">Check/Uncheck All</font></a><br><br>
 		Please select which vulnerabilities to test for:<br>
-		<input type="checkbox" name="rxss" value="rxss" checked />Reflected Cross-Site Scripting<br>
-		<input type="checkbox" name="sxss" value="sxss" checked />Stored Cross-Site Scripting (Warning: can be time consuming and can take longer that all of the other tests combined together)<br>
-		<input type="checkbox" name="sqli" value="sqli" checked />Standard SQL Injection<br>
-		<input type="checkbox" name="basqli" value="basqli" checked />Broken Authentication using SQL Injection<br>
-		<input type="checkbox" name="autoc" value="autoc" checked />Autocomplete enabled on sensitive input fields<br>
-		<input type="checkbox" name="idor" value="idor" checked />(Potientially Insecure) Direct Object References<br>
-		<input type="checkbox" name="dirlist" value="dirlist" checked />Directory Listing Enabled<br>
-		<input type="checkbox" name="bannerdis" value="bannerdis" checked />HTTP Banner Disclosure<br>
-		<input type="checkbox" name="sslcert" value="sslcert" checked />SSL Certificate not trusted<br>
-		<input type="checkbox" name="unredir" value="unredir" checked />Unvalidated Redirects<br>
+		<table border="0">
+		<tr><td><input type="checkbox" name="rxss" value="rxss" checked /></td><td>Reflected Cross-Site Scripting</td></tr>
+		<tr><td><input type="checkbox" name="sxss" value="sxss" checked /></td><td>Stored Cross-Site Scripting (Warning: can be time consuming and can take longer that all of the other tests combined together)</td></tr>
+		<tr><td><input type="checkbox" name="sqli" value="sqli" checked /></td><td>Standard SQL Injection</td></tr>
+		<tr><td><input type="checkbox" name="basqli" value="basqli" checked /></td><td>Broken Authentication using SQL Injection</td></tr>
+		<tr><td><input type="checkbox" name="autoc" value="autoc" checked /></td><td>Autocomplete enabled on sensitive input fields</td></tr>
+		<tr><td><input type="checkbox" name="idor" value="idor" checked /></td><td>(Potientially Insecure) Direct Object References</td></tr>
+		<tr><td><input type="checkbox" name="dirlist" value="dirlist" checked /></td><td>Directory Listing Enabled</td></tr>
+		<tr><td><input type="checkbox" name="bannerdis" value="bannerdis" checked /></td><td>HTTP Banner Disclosure</td></tr>
+		<tr><td><input type="checkbox" name="sslcert" value="sslcert" checked /></td><td>SSL Certificate not trusted</td></tr>
+		<tr><td><input type="checkbox" name="unredir" value="unredir" checked /></td><td>Unvalidated Redirects</td></tr>
+		</table>
+		<br>
 		<br>Other Options:<br>
-		<input type="checkbox" name="emailpdf" value="emailpdf" checked />Email PDF Report - If this is disabled, the PDF report will not be emailed to you but you can view/download it in your scan history<br>
+		<table border="0">
+		<tr><td><input type="checkbox" name="emailpdf" value="emailpdf" checked /></td><td>Email PDF Report - If this is disabled, the PDF report will not be emailed to you but you can view/download it in your scan history</td></tr>
+		<tr><td><input type="checkbox" name="crawlurl" value="crawlurl" checked /></td><td>Crawl Website - If this is disabled, the URL will not be crawled for all URLs belonging to the website. Only the URL entered will be tested</td></tr>
+		</table>
 		</div>
 		<p>
 		  <input type="submit" class="button" name="submit" id="submit" value="Start Scan" />
 		</p>
 	 </form>
 	
-	
-
-	
-	
 <?php
 
-	//Drupal Expand/Collapse -> Wont work?
-	/*
-	drupal_add_js('misc/collapse.js');
-	echo '<fieldset class="collapsible collapsed">
-		<legend>Title of collapsible content</legend>
-		<div class="fieldset-wrapper">Hidden text fwrewrwerere</div>
-		</fieldset>';
-	*/
-
-	
 	if(isset($_POST['urlToScan']))
 	{
-		$testCases = ' ';//vulnerabilties to test for
+		$testCases = ' ';//options
 		if(isset($_POST['rxss'])) $testCases .= $_POST['rxss'] . ' ';
 		if(isset($_POST['sxss'])) $testCases .= $_POST['sxss'] . ' ';
 		if(isset($_POST['sqli'])) $testCases .= $_POST['sqli'] . ' ';
@@ -130,6 +142,7 @@ if(isset($_SESSION['username']))
 		if(isset($_POST['sslcert'])) $testCases .= $_POST['sslcert'] . ' ';
 		if(isset($_POST['unredir'])) $testCases .= $_POST['unredir'] . ' ';
 		if(isset($_POST['emailpdf'])) $testCases .= $_POST['emailpdf'] . ' ';
+		if(isset($_POST['crawlurl'])) $testCases .= $_POST['crawlurl'] . ' ';
 	
 		$urlToScan = trim($_POST['urlToScan']);
 		if(!empty($urlToScan))
