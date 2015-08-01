@@ -6,7 +6,7 @@ WebVulScan is a web application vulnerability scanner. It is a web application i
 
 After a scan is complete, a detailed PDF report is emailed to the user. The report includes descriptions of the vulnerabilities found, recommendations and details of where and how each vulnerability was exploited. 
 
-![alt tag](/Scanner1.JPG)
+![alt tag](/Scanner1.JPG?raw=true)
 
 The vulnerabilities tested by WebVulScan are:
 
