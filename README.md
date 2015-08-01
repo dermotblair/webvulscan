@@ -36,7 +36,9 @@ See ReadMe file in txt and docx format for installation instructions.
 
 ## Discussion
 
-For previously found problems and solutions, please see: https://groups.google.com/forum/#!forum/webvulscan
+As this project was exported from Google Code, previously found problems and solutions are available at: 
+- https://groups.google.com/forum/#!forum/webvulscan
+- https://code.google.com/p/webvulscan/issues/list
 
 For any other issues or feedback, please contact webvulscan@gmail.com
 
